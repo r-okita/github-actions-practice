@@ -1,0 +1,20 @@
+name: Environment Variables
+
+on: [push]
+
+env:
+  GREETING: Hello
+
+jobs:
+  demo:
+    runs-on: ubuntu-latest
+    env:
+      TARGET: World
+    steps:
+      - name: Use env vars
+        run: echo "$GREETING, $TARGET!"
+      
+      - name: Step env
+        run: 'echo "Branch: $BRANCH"'
+        env:
+          BRANCH: ${{ github.ref_name }}
