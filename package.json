@@ -19,6 +19,9 @@
   },
   "homepage": "https://github.com/r-okita/github-actions-practice#readme",
   "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^8.62.1",
+    "@typescript-eslint/parser": "^8.62.1",
+    "eslint": "^10.6.0",
     "vitest": "^4.1.9"
   }
 }
