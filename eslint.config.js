@@ -1,16 +1,26 @@
-import js from "@eslint/js";
-import tseslint from "typescript-eslint";
+const tsParser = require("@typescript-eslint/parser");
+const tsPlugin = require("@typescript-eslint/eslint-plugin");
 
-export default [
-  js.configs.recommended,
-  ...tseslint.configs.recommended,
+module.exports = [
   {
-    files: ["**/*.{ts,tsx}"],
-    rules: {
-      // 必要に応じてルールを追加
-    },
+    ignores: ["node_modules/", "dist/", "build/", "coverage/"],
   },
   {
-    ignores: ["node_modules/", "dist/", "build/"],
+    files: ["**/*.{ts,tsx}"],
+    languageOptions: {
+      parser: tsParser,
+      ecmaVersion: "latest",
+      sourceType: "module",
+      // tsconfig.jsonを使用した型チェックを行う場合の設定
+      // parserOptions: {
+      //   project: "./tsconfig.json",
+      // },
+    },
+    plugins: {
+      "@typescript-eslint": tsPlugin,
+    },
+    rules: {
+      ...tsPlugin.configs.recommended.rules,
+    },
   },
 ];
