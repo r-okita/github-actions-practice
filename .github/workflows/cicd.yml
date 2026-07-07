@@ -57,3 +57,19 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./dist
+          
+      - name: Notify Slack
+        if: success()
+        run: |
+          echo "Deployed to: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/"
+
+      - name: Notify Slack failure
+        if: failure()
+        run: |
+          echo "Deployed failed."
+          echo "Please check the deploy step logs."
+
+      - name: Notify Slack always
+        if: always()
+        run: |
+          echo "The deploy job has completed."
